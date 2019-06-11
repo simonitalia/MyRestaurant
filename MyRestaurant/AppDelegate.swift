@@ -10,12 +10,32 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
+    //MARK: - Custom properties / methods to respond to app wide changes
+    
+    //Trigger My Order Tab bar item updates
+    static var myOrderTabBarItem: UITabBarItem!
+    
+    @objc func updateMyOrderBadge() {
+        AppDelegate.myOrderTabBarItem.badgeValue = String(MenuController.order.menuItems.count)
+    }
+    
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //Set temp Url cdirectory and cache size
+        let tempCacheDirectory = NSTemporaryDirectory()
+        let urlCache = URLCache(memoryCapacity: 25_000_000, diskCapacity: 50_000_000, diskPath: tempCacheDirectory)
+        URLCache.shared = urlCache
+        
+        //Respond to order object changes by triggering an update to the My Order Tab Bar value
+        NotificationCenter.default.addObserver(self, selector: #selector(updateMyOrderBadge), name: MenuController.orderUpdateNotification, object: nil)
+        
+        //Inform App Delegate of what object is myOrderTabBarItem
+        AppDelegate.myOrderTabBarItem = (self.window!.rootViewController! as! UITabBarController).viewControllers![1].tabBarItem
+        
         return true
     }
 
