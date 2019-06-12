@@ -43,6 +43,11 @@ class MenuController {
                 completion(categories.categories)
             
             } else {
+                
+                //Handle issues fetching data
+                if let error = error {
+                    print("Error fetching categories with error:  \(error)")
+                }
                 completion(nil)
             }
 //                let jsonDictionary = try? JSONSerialization.jsonObject(with: data) as?

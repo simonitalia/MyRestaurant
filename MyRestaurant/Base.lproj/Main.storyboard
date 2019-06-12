@@ -238,7 +238,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="navBarSubmitButton" destination="r2a-ZM-6bc" id="SBB-zO-aNe"/>
-                        <segue destination="Esz-YW-TQz" kind="presentation" identifier="OrderToOrderConfirmationVC" id="6LF-Nj-OOI"/>
+                        <segue destination="Esz-YW-TQz" kind="show" identifier="OrderToOrderConfirmationVC" id="6LF-Nj-OOI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pJJ-4n-nOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -250,20 +250,20 @@
             <objects>
                 <viewController title="Order Confirmation" id="Esz-YW-TQz" customClass="OrderConfirmationViewController" customModule="MyRestaurant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3nP-6b-vqZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Gfs-aT-z94">
-                                <rect key="frame" x="20" y="44" width="374" height="798"/>
+                                <rect key="frame" x="20" y="0.0" width="374" height="653"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Estimated Prep Time&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BN-l9-8sb">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="728"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="583"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Juj-hU-mbV">
-                                        <rect key="frame" x="0.0" y="738" width="374" height="60"/>
+                                        <rect key="frame" x="0.0" y="593" width="374" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="o8i-Kc-jMf"/>
@@ -295,7 +295,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O5u-M0-CYU"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Order Confirmation" id="0bV-Mj-3hx"/>
+                    <navigationItem key="navigationItem" title="Order Confirmation" id="0bV-Mj-3hx">
+                        <barButtonItem key="rightBarButtonItem" title="Get Updates?" id="p1b-qn-8FU">
+                            <connections>
+                                <action selector="registerLocalButtonTapped:" destination="Esz-YW-TQz" id="wyJ-Vi-EIJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="prepTimeRemainingLabel" destination="9BN-l9-8sb" id="Don-w2-KEF"/>
                     </connections>
