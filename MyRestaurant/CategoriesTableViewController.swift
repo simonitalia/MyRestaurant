@@ -71,19 +71,6 @@ class CategoriesTableViewController: UITableViewController {
         }
     }
     
-    //Setup unwind method, to navigate user back this VC when user dismisses OrderConfirmation VC
-    @IBAction func unwindToCategoriesTableVC(segue: UIStoryboardSegue) {
-        
-        if segue.identifier == "DismissOrderConfirmationVC" {
-            
-            //Clear out order object / data
-            MenuController.order.menuItems.removeAll()
-            
-            //Update saved order on Disk
-//            Order.save()
-        }
-    }
-    
     //Error alert in case of issues fetching Categories from server
     func showErrorAlert(_ error: Error) {
         
@@ -95,6 +82,17 @@ class CategoriesTableViewController: UITableViewController {
             }))
             ac.addAction(UIAlertAction(title: "Cancel", style: .default))
             self.present(ac, animated: true)
+        }
+    }
+    
+    //Setup unwind method, to navigate user back this VC when user dismisses OrderConfirmation VC
+    @IBAction func unwindToCategoriesTableVC(segue: UIStoryboardSegue) {
+        
+        if segue.identifier == "DismissOrderConfirmationVC" {
+            
+            //Clear out order object / data and any pending notifications
+            MenuController.order.menuItems.removeAll()
+        OrderConfirmationViewController.center.removeAllPendingNotificationRequests()
         }
     }
 }

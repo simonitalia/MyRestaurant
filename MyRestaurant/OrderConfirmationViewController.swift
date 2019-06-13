@@ -11,15 +11,16 @@ import UserNotifications
 
 class OrderConfirmationViewController: UIViewController, UNUserNotificationCenterDelegate {
     
+    static var center = UNUserNotificationCenter.current()
+    
     @IBOutlet weak var prepTimeRemainingLabel: UILabel!
     
     //IBOutlet for usewr to subscribe to local notifications
     @IBAction func registerLocalButtonTapped(_ sender: Any) {
         
         //Reequest user permission for notifications
-        let notificationCenter = UNUserNotificationCenter.current()
-        
-        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) {
+//        let notificationCenter = UNUserNotificationCenter.current()
+        OrderConfirmationViewController.center.requestAuthorization(options: [.alert, .badge, .sound]) {
             (granted, error) in
             if granted {
                 print("Permission to receive notifications granted")
@@ -31,7 +32,6 @@ class OrderConfirmationViewController: UIViewController, UNUserNotificationCente
                 print("Permission to receive notifications denied!")
             }
         }
-        
     }
     
     //Property to receive Order minutes from OrderTableVC
@@ -57,7 +57,7 @@ class OrderConfirmationViewController: UIViewController, UNUserNotificationCente
         //Call method to display Notification Action Button
         registerCategories()
         
-        let notificationCenter = UNUserNotificationCenter.current()
+//        let notificationCenter = UNUserNotificationCenter.current()
         
         //Interval based trigger (4 minutes before order is ready)
         let interval: TimeInterval = 10
@@ -78,9 +78,7 @@ class OrderConfirmationViewController: UIViewController, UNUserNotificationCente
         
         ////Configure request with calendar based trigger
         let timeIntervalNotificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: notificationContent, trigger: timeIntervalTrigger)
-        
-        notificationCenter.add(timeIntervalNotificationRequest)
-
+        OrderConfirmationViewController.center.add(timeIntervalNotificationRequest)
     }
     
     //Setup Notification Action Button
