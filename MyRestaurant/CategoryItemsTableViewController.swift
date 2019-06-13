@@ -17,12 +17,22 @@ class CategoryItemsTableViewController: UITableViewController {
         super.viewDidLoad()
 
         title = category.capitalized
+        fireFetchMenuItems()
+        
+    }
+    
+    func fireFetchMenuItems() {
         
         //Fetch Menu items JSON Data from API end point
-        MenuController.shared.fetchMenuItems(forCategory: category) { (fetchedMenuItems) in
+        MenuController.shared.fetchMenuItems(forCategory: category) { (fetchedMenuItems, error) in
             if let menuItems = fetchedMenuItems {
                 self.updateUI(with: menuItems)
                 print("Fetched Category Menu Items: \(menuItems)")
+            
+            } else {
+                if let error = error {
+                    self.showErrorAlert(error)
+                }
             }
         }
     }
@@ -96,6 +106,20 @@ class CategoryItemsTableViewController: UITableViewController {
             
             //Update Add to Order Button flag
             ItemDetailViewController.showAddToOrderButton = true
+        }
+    }
+    
+    //Error alert in case of issues fetching Menu Items from server
+    func showErrorAlert(_ error: Error) {
+        
+        DispatchQueue.main.async {
+            let ac = UIAlertController(title: "Error!", message: "\(error.localizedDescription)", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "Try again?", style: .default, handler: {
+                action in self.fireFetchMenuItems()
+            }))
+            ac.addAction(UIAlertAction(title: "Cancel", style: .default))
+            self.present(ac, animated: true)
         }
     }
 }

@@ -35,7 +35,7 @@ class MenuController {
     let baseURL = URL(string: "http://127.0.0.1:8090/")!
     
     //MARK: - Methods to Fetch data from API end points
-    func fetchCategories(completion: @escaping ([String]?) throws -> Void) {
+    func fetchCategories(completion: @escaping ([String]?, Error?) -> Void) {
         let categoriesURL = baseURL.appendingPathComponent("categories")
         
         let task = URLSession.shared.dataTask(with: categoriesURL) {
@@ -45,29 +45,11 @@ class MenuController {
             if let data = data,
                 
                 let categories = try? jsonDecoder.decode(Categories.self, from: data) {
-                
-                do {
-                    //Try decoding data into Categories.categories
-                    try completion(categories.categories)
-                    
-                } catch {
-                    
-                    //If json decoding fails, throw an error
-                    print("Error decoding categories with error:  \(error.localizedDescription)")
-                }
+                completion(categories.categories, nil)
                 
             } else {
-                
-                if let _ = error {
-                    
-                    do {
-                        try completion(nil)
-                    
-                    } catch {
-                        //Handle issues fetching data
-                        
-                        print("Error fetching categories with error:  \(error.localizedDescription)")
-                    }
+                if let error = error {
+                    completion(nil, error)
                 }
             }
         }
@@ -75,7 +57,7 @@ class MenuController {
         task.resume()
     }
     
-    func fetchMenuItems(forCategory categoryName: String, completion: @escaping ([MenuItem]?) -> Void) {
+    func fetchMenuItems(forCategory categoryName: String, completion: @escaping ([MenuItem]?, Error?) -> Void) {
         
         let initialMenuURL = baseURL.appendingPathComponent("menu")
         
@@ -90,14 +72,12 @@ class MenuController {
             if let data = data,
             
                 let menu = try? jsonDecoder.decode(Menu.self, from: data) {
-                completion(menu.items)
+                completion(menu.items, nil)
             
             } else {
                 if let error = error {
-                    print("Error fetching menu items for Category with error: \(error.localizedDescription)")
+                    completion(nil, error)
                 }
-                
-                completion(nil)
             }
         }
         

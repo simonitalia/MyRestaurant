@@ -9,15 +9,24 @@
 import UIKit
 
 class CategoriesTableViewController: UITableViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MenuController.shared.fetchCategories { (fetchedCategories) in
+        fireFetchCategories()
+    }
+    
+    func fireFetchCategories() {
+        MenuController.shared.fetchCategories { (fetchedCategories, error) in
             if let categories = fetchedCategories {
                 MenuController.categories = categories
                 self.updateUI(with: categories)
                 print("Fetched Categories: \(categories)")
+                
+            } else {
+                if let error = error {
+                    self.showErrorAlert(error)
+                }
             }
         }
     }
@@ -69,6 +78,19 @@ class CategoriesTableViewController: UITableViewController {
         if segue.identifier == "DismissOrderConfirmationVC" {
             MenuController.order.menuItems.removeAll()
         }
+    }
+    
+    //Error alert in case of issues fetching Categories from server
+    func showErrorAlert(_ error: Error) {
         
+        DispatchQueue.main.async {
+            let ac = UIAlertController(title: "Error!", message: "\(error.localizedDescription)", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "Try again?", style: .default, handler: {
+                action in self.fireFetchCategories()
+            }))
+            ac.addAction(UIAlertAction(title: "Cancel", style: .default))
+            self.present(ac, animated: true)
+        }
     }
 }
