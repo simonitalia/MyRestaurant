@@ -10,6 +10,11 @@
 import Foundation
 import UIKit
 
+//enum ErrorsToThrow: Error {
+//
+//}
+
+
 class MenuController {
     
     //Static propeties to share objects across the app's VCs
@@ -30,7 +35,7 @@ class MenuController {
     let baseURL = URL(string: "http://127.0.0.1:8090/")!
     
     //MARK: - Methods to Fetch data from API end points
-    func fetchCategories(completion: @escaping ([String]?) -> Void) {
+    func fetchCategories(completion: @escaping ([String]?) throws -> Void) {
         let categoriesURL = baseURL.appendingPathComponent("categories")
         
         let task = URLSession.shared.dataTask(with: categoriesURL) {
@@ -38,28 +43,33 @@ class MenuController {
             
             let jsonDecoder = JSONDecoder()
             if let data = data,
-            
+                
                 let categories = try? jsonDecoder.decode(Categories.self, from: data) {
-                completion(categories.categories)
-            
+                
+                do {
+                    //Try decoding data into Categories.categories
+                    try completion(categories.categories)
+                    
+                } catch {
+                    
+                    //If json decoding fails, throw an error
+                    print("Error decoding categories with error:  \(error.localizedDescription)")
+                }
+                
             } else {
                 
-                //Handle issues fetching data
-                if let error = error {
-                    print("Error fetching categories with error:  \(error)")
+                if let _ = error {
+                    
+                    do {
+                        try completion(nil)
+                    
+                    } catch {
+                        //Handle issues fetching data
+                        
+                        print("Error fetching categories with error:  \(error.localizedDescription)")
+                    }
                 }
-                completion(nil)
             }
-//                let jsonDictionary = try? JSONSerialization.jsonObject(with: data) as?
-//                [String: Any],
-//
-//                let categories = jsonDictionary ["categories"] as? [String] {
-//                        completion(categories)
-//            } else {
-//
-//                //If any of the above fails, set completion to nil
-//                completion(nil)
-//            }
         }
         
         task.resume()
@@ -78,10 +88,15 @@ class MenuController {
             
             let jsonDecoder = JSONDecoder()
             if let data = data,
+            
                 let menu = try? jsonDecoder.decode(Menu.self, from: data) {
                 completion(menu.items)
             
             } else {
+                if let error = error {
+                    print("Error fetching menu items for Category with error: \(error.localizedDescription)")
+                }
+                
                 completion(nil)
             }
         }
