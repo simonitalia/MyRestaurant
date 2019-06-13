@@ -34,6 +34,8 @@ class ItemDetailViewController: UIViewController {
         MenuController.order.menuItems.append(menuItem)
         print("Item/s in Order: \(MenuController.order.menuItems)")
         
+        //Save order object to disk
+//        Order.save()
     }
 
     override func viewDidLoad() {
@@ -72,6 +74,5 @@ class ItemDetailViewController: UIViewController {
             }
         }
     }
-
 }
 

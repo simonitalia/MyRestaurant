@@ -74,9 +74,13 @@ class CategoriesTableViewController: UITableViewController {
     //Setup unwind method, to navigate user back this VC when user dismisses OrderConfirmation VC
     @IBAction func unwindToCategoriesTableVC(segue: UIStoryboardSegue) {
         
-        //Clear out order object / data
         if segue.identifier == "DismissOrderConfirmationVC" {
+            
+            //Clear out order object / data
             MenuController.order.menuItems.removeAll()
+            
+            //Update saved order on Disk
+//            Order.save()
         }
     }
     

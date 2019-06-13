@@ -41,7 +41,6 @@ class OrderConfirmationViewController: UIViewController, UNUserNotificationCente
         super.viewDidLoad()
         
         updateUI()
-        
     }
     
     func updateUI() {
@@ -94,7 +93,5 @@ class OrderConfirmationViewController: UIViewController, UNUserNotificationCente
         
         let notificationCategory = UNNotificationCategory(identifier: "reminder", actions:[showNotificationAction], intentIdentifiers: [])
         notificationCenter.setNotificationCategories([notificationCategory])
-        
     }
-    
 }

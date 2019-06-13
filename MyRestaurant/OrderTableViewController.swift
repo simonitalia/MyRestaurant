@@ -14,12 +14,14 @@ class OrderTableViewController: UITableViewController {
     
     var orderMinutes: Int!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Display Edit button on nav bar and set initial state
         navigationItem.leftBarButtonItem = editButtonItem
+        
+        //Load (if) any exitsing order data from disk / user defaults
+//        Order.load()
         
         //Set initial nav bar button states
         updateNavBarButtonsState()
@@ -78,7 +80,6 @@ class OrderTableViewController: UITableViewController {
         return cell
     }
     
-    //
     // MARK: - Override methods to support conditional editing of the table view.
     
     //Enable deletion of table row/s
@@ -93,12 +94,11 @@ class OrderTableViewController: UITableViewController {
             
             // Delete the row from the data source
             MenuController.order.menuItems.remove(at: indexPath.row)
-
-//            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            //Update order object saved on disk
+//            Order.save()
         }
-//            else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
+
     }
     
     //Pass Menu Item Data to MenuItemDetailTableVC via Segue
