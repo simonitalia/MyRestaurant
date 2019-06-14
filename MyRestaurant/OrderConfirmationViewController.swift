@@ -15,6 +15,14 @@ class OrderConfirmationViewController: UIViewController, UNUserNotificationCente
     
     @IBOutlet weak var prepTimeRemainingLabel: UILabel!
     
+    //Reset Button tapped actions
+    @IBAction func resetButtonTapped(_ sender: Any) {
+        
+        //Reset root view controller Order Tab to ensure user is sent back root VC if navigating back to Order tab after a Reset button on this VC has been tapped
+        navigationController?.popToRootViewController(animated: false)
+    }
+    
+    
     //IBOutlet for usewr to subscribe to local notifications
     @IBAction func registerLocalButtonTapped(_ sender: Any) {
         

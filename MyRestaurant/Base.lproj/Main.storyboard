@@ -273,6 +273,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
+                                            <action selector="resetButtonTapped:" destination="Esz-YW-TQz" eventType="touchUpInside" id="ljp-8P-Tmt"/>
                                             <segue destination="Ewv-CH-g4s" kind="unwind" identifier="DismissOrderConfirmationVC" unwindAction="unwindToCategoriesTableVCWithSegue:" id="PKa-cf-Oqx"/>
                                         </connections>
                                     </button>
