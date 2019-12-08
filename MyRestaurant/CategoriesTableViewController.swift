@@ -17,6 +17,7 @@ class CategoriesTableViewController: UITableViewController {
     }
     
     func fireFetchCategories() {
+        
         MenuController.shared.fetchCategories { (fetchedCategories, error) in
             if let categories = fetchedCategories {
                 MenuController.categories = categories

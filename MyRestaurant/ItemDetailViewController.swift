@@ -63,6 +63,7 @@ class ItemDetailViewController: UIViewController {
         menuItemNameLabel.text = menuItem.name
         menuItemPriceLabel.text = String(format: "$%.2f", menuItem.price)
         menuItemDetailLabel.text = menuItem.detailText
+        menuItemDetailLabel.sizeToFit()
         
         //Menu Item image
         MenuController.shared.fetchMenuItemImage(url: menuItem.imageURL) { (fetchedImage) in

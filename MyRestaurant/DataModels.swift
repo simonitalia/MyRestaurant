@@ -8,16 +8,6 @@
 
 import Foundation
 
-//struct Category: Codable {
-//    var label: String
-//    
-//}
-
-struct Categories: Codable  {
-    var categories: [String]
-
-}
-
 //Pull in each item from remote server and construct menu item object
 struct MenuItem: Codable {
     
@@ -44,6 +34,11 @@ struct MenuItem: Codable {
 struct Menu: Codable {
     
     var items: [MenuItem]
+    
+}
+
+struct Categories: Codable  {
+    var categories: [String]
     
 }
 

@@ -10,11 +10,6 @@
 import Foundation
 import UIKit
 
-//enum ErrorsToThrow: Error {
-//
-//}
-
-
 class MenuController {
     
     //Static propeties to share objects across the app's VCs
