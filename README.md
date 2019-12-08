@@ -16,6 +16,12 @@ Menu / Category Data is provided in a locally (computer) hosted JSON files.
 # Demo
 ![Demo](Demo_08122019.gif)
 
+# Course
+App Development with Swift
+
+# Education supplier
+This iOS app project forms part of the iBook "App Development with Swift" which is part of the "Everyone can code" iBooks tutorial series, authored by Apple.
+
 # Topics / milestones
 
 - UIKit
