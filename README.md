@@ -5,8 +5,9 @@ UIKit
 My Restaurant
 
 # Objective
-The aim of this app is develop a restaurant menu, customers can search and select items from, and place an order. 
-Menu / Category Data is provided in a locally (computer) hosted JSON files.
+The aim of this app is develop a Restaurant menu customers can review and select items from, add to an order, and then submit the order. Menu / Category Data is provided in locally (computer) hosted JSON files, and order submission uses POST methods.
+
+# Key Features
 - Fetch and display Menu Category List eg: Soups, Apps etc (Default / Launch Menu screen)
 - Display List of dishes with image, under each Category (Catgeory List screen)
 - Display Details item screen showing details of each dish, including image, price and description and add dish to Order (Menu Item / Dish Details Screen)
