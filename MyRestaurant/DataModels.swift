@@ -32,7 +32,6 @@ struct MenuItem: Codable {
 
 //Store each menu item object as collection of items / obejcts
 struct Menu: Codable {
-    
     var items: [MenuItem]
     
 }
