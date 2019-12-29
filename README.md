@@ -23,7 +23,7 @@ App Development with Swift
 # Education supplier
 This iOS app project forms part of the iBook "App Development with Swift" which is part of the "Everyone can code" iBooks tutorial series, authored by Apple.
 
-# Topics / milestones
+# Technologies
 
 - UIKit
 
